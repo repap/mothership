@@ -3,8 +3,6 @@ services:
   dagster-webserver:
     build: .
     restart: always
-    ports:
-      - "3000:3000"
     environment:
       - DAGSTER_HOME=/opt/dagster/dagster_home
       # DB Vars werden von Coolify injiziert
@@ -18,8 +16,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    networks:
-      - coolify
 
   # Der Daemon (Führt Schedules & Sensoren aus)
   dagster-daemon:
@@ -33,11 +29,5 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
     command: ["dagster-daemon", "run"]
-    networks:
-      - coolify
     depends_on:
       - dagster-webserver
-
-networks:
-  coolify:
-    external: true
