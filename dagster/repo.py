@@ -1,16 +1,15 @@
-from dagster import job, op, repository, ScheduleDefinition
+import dagster as dg
 
-@op
-def welcome_op():
-    return "Willkommen auf dem Mothership!"
+@dg.asset
+def hello(context: dg.AssetExecutionContext):
+    context.log.info("Hello!")
 
-@job
-def welcome_job():
-    welcome_op()
 
-@repository
-def mothership_repo():
-    return [
-        welcome_job,
-        ScheduleDefinition(job=welcome_job, cron_schedule="0 9 * * *"),
-    ]
+@dg.asset(deps=[hello])
+def world(context: dg.AssetExecutionContext):
+    context.log.info("World!")
+
+
+@dg.definitions
+def defs():
+    return dg.Definitions(assets=[hello, world])
