@@ -11,13 +11,13 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
     command: ["dagster-webserver", "-h", "0.0.0.0", "-p", "3000", "-w", "workspace.yaml"]
-    healthcheck:
-      test: ["CMD-SHELL", "python3 -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:3000/server_info\")' || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    networks:
-      - coolify
+    # healthcheck:
+    #   test: ["CMD-SHELL", "python3 -c 'import urllib.request; urllib.request.urlopen(\"http://localhost:3000/server_info\")' || exit 1"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 3
+    # networks:
+    #   - coolify
 
   # Der Daemon (Führt Schedules & Sensoren aus)
   dagster-daemon:
@@ -31,11 +31,11 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
     command: ["dagster-daemon", "run"]
-    networks:
-      - coolify
+    # networks:
+    #   - coolify
     depends_on:
       - dagster-webserver
 
-networks:
-  coolify:
-    external: true
+# networks:
+#   coolify:
+#     external: true
