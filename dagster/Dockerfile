@@ -27,5 +27,6 @@ RUN mkdir -p $DAGSTER_HOME
 
 # WICHTIG: Die dagster.yaml muss im DAGSTER_HOME liegen
 RUN cp dagster.yaml $DAGSTER_HOME/dagster.yaml
+RUN cp workspace.yaml $DAGSTER_HOME/workspace.yaml
 
 # Ports werden zur Laufzeit via docker-compose geöffnet
