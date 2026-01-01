@@ -8,6 +8,7 @@ ENV PYTHONUNBUFFERED=1
 # System-Abhängigkeiten für Postgres (psycopg2) installieren
 RUN apt-get update && apt-get install -y \
     libpq-dev \
+    curl \
     gcc \
     git \
     && rm -rf /var/lib/apt/lists/*
