@@ -1,0 +1,31 @@
+storage:
+  postgres:
+    postgres_db:
+      hostname:
+        env: DB_HOST
+      username:
+        env: DB_USER
+      password:
+        env: DB_PASSWORD
+      db_name:
+        env: DB_NAME
+      port: 5432
+
+# Compute Logs (Die Konsolen-Ausgaben deiner Skripte) auch in die DB
+compute_logs:
+  module: dagster_postgres.compute_log_manager
+  class: PostgresComputeLogManager
+  config:
+    hostname:
+      env: DB_HOST
+    username:
+      env: DB_USER
+    password:
+      env: DB_PASSWORD
+    db_name:
+      env: DB_NAME
+    port: 5432
+
+# Telemetrie ausschalten (optional)
+telemetry:
+  enabled: false

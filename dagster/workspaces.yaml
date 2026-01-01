@@ -1,0 +1,6 @@
+load_from:
+  - grpc_server:
+      host: 10.0.0.4
+      port: 4000
+      location_name: "kunde_eis_gmbh"
+  - python_file: repo.py
